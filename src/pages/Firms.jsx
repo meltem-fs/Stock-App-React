@@ -46,7 +46,7 @@ const Firms = () => {
 
   return (
     <Box>
-      <Typography variant="h4" color="error" mb={4}>
+      <Typography variant="h4" color="purple" mb={4}>
         Firms
       </Typography>
 
