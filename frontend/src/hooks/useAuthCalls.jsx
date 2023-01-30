@@ -15,13 +15,13 @@ const useAuthCalls = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const BASE_URL = "https://11511.fullstack.clarusway.com/";
+  const BASE_URL = "http://127.0.0.1:8000/";
 
   const login = async (userInfo) => {
     dispatch(fetchStart());
     try {
       const { data } = await axios.post(
-        `${BASE_URL}account/auth/login/`,
+        `${BASE_URL}users/auth/login/`,
         userInfo
       );
 
@@ -37,7 +37,7 @@ const useAuthCalls = () => {
   const logout = async () => {
     dispatch(fetchStart());
     try {
-      await axios.post(`${BASE_URL}account/auth/logout/`);
+      await axios.post(`${BASE_URL}users/auth/logout/`);
       dispatch(logoutSuccess());
       toastSuccessNotify("Logout performed");
       navigate("/");
@@ -51,7 +51,7 @@ const useAuthCalls = () => {
     dispatch(fetchStart());
     try {
       const { data } = await axios.post(
-        `${BASE_URL}account/register/`,
+        `${BASE_URL}users/register/`,
         userInfo
       );
       dispatch(registerSuccess(data));
