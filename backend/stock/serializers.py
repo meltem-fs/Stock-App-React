@@ -32,13 +32,38 @@ class ProductSerializers(serializers.ModelSerializer):
 
 class PurchasesSerializers(serializers.ModelSerializer):
 
+    total_price=serializers.SerializerMethodField()
+    category=serializers.SerializerMethodField()
+    firm=serializers.StringRelatedField(read_only=True)
+    firm_id=serializers.IntegerField()
+    brand=serializers.StringRelatedField(read_only=True)
+    brand_id=serializers.IntegerField()
+    product=serializers.StringRelatedField(read_only=True)
+    product_id=serializers.IntegerField()
+
     class Meta:
         model=Purchases
-        fields=("id","user","firm","brand","product","quantity","price")
+        fields=("id","user","category","firm","firm_id","brand","brand_id", "product","product_id", "quantity","price","total_price")
+
+    def get_category(self,obj):
+        return obj.product.category.name
+
+    def get_total_price(self,obj):
+        return obj.quantity*obj.price
 
 
 class SalesSerializers(serializers.ModelSerializer):
 
+    total_price=serializers.SerializerMethodField()
+    category=serializers.SerializerMethodField()
+    brand=serializers.StringRelatedField(read_only=True)
+    brand_id=serializers.IntegerField()
+    product=serializers.StringRelatedField(read_only=True)
+    product_id=serializers.IntegerField()
+
     class Meta:
         model=Sales
-        fields=("id","user","brand","product","quantity","price")
+        fields=("id","user","category","brand","brand_id", "product","product_id", "quantity","price","total_price")
+
+    def get_category(self,obj):
+        return obj.product.category.name    
