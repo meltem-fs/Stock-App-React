@@ -11,5 +11,5 @@ router.register("sales",SalesMVS)
 router.register("purchases",PurchasesMVS)
 
 urlpatterns = [
-    path("",include(router.urls))
+    path("stock/",include(router.urls))
 ]
