@@ -67,3 +67,7 @@ class SalesSerializers(serializers.ModelSerializer):
 
     def get_category(self,obj):
         return obj.product.category.name    
+
+    def get_total_price(self,obj):
+        return obj.quantity*obj.price
+    
