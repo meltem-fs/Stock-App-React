@@ -3,6 +3,7 @@ from .serializers import FirmSerializer,CategorySerializer,ProductSerializers,Br
 from rest_framework.viewsets import ModelViewSet 
 from .models import Firm,Category,Brand,Product,Purchases,Sales
 from rest_framework import status
+from rest_framework import filters
 from rest_framework.response import Response
 from rest_framework.permissions import IsAdminUser 
 from django_filters.rest_framework import DjangoFilterBackend
@@ -28,8 +29,9 @@ class BrandMVS(ModelViewSet):
 class ProductMVS(ModelViewSet):
     queryset = Product.objects.all()
     serializer_class=ProductSerializers
-    filter_backends = [DjangoFilterBackend]
+    filter_backends = [DjangoFilterBackend,filters.SearchFilter]
     filterset_fields = ['id','category', 'stock']
+    search_fields = ['id','category']
 
 
 
